@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +18,5 @@ use App\Http\Controllers\UserController;
 
 Route::post('/register',[UserController::class, 'register']);
 Route::post('/user/{user}/update', [UserController::class, 'update']);
+
+Route::get('/product', [ProductController::class, 'index']);
