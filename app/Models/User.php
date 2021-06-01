@@ -47,4 +47,10 @@ class User extends Authenticatable
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:8',
     ];
+
+    public $messages = [
+        'required' => 'Field :attribute is required.',
+        'email' => 'Email must be a valid email address.',
+        'password.min' => 'Password must be at least 8 characters.',
+    ];
 }

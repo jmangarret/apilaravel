@@ -16,12 +16,12 @@ class UserController extends Controller
     {
         $user = new User();
 
-        $validator  =Validator::make($request->all(),$user->rules);
-        if ($validator ->fails()) {
+        $validator  =Validator::make($request->all(),$user->rules, $user->messages);
+        if ($validator->fails()) {
             return response()->json([
-                'request' => $validator->errors(),
+                'errors' => $validator->errors(),
                 'messsage' => 'Register Failed...',
-            ]);
+            ], 400);
         }
 
         $data =  $request->all();
@@ -35,21 +35,21 @@ class UserController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'request' => $request->all(),
+            'data' => $request->all(),
             'messsage' => 'Register Succesfully...',
-        ]);
+        ], 201);
     }
     /**
      * function update user
      */
     public function update(User $user, Request $request)
     {
-        $validator  =Validator::make($request->all(),$user->rules);
+        $validator  =Validator::make($request->all(),$user->rules, $user->messages);
         if ($validator ->fails()) {
             return response()->json([
-                'request' => $validator->errors(),
-                'messsage' => 'Register Failed...',
-            ]);
+                'errors' => $validator->errors(),
+                'messsage' => 'Updated Failed...',
+            ], 400);
         }
 
         $data =  $request->all();
@@ -59,8 +59,8 @@ class UserController extends Controller
         $user->save();
 
         return response()->json([
-            'request' => $request->all(),
+            'data' => $request->all(),
             'messsage' => 'Updated Succesfully...',
-        ]);
+        ], 200);
     }
 }
