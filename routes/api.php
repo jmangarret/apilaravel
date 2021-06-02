@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductController;
 
 
 Route::post('/register',[UserController::class, 'register']);
-Route::post('/user/{user}/update', [UserController::class, 'update']);
+Route::put('/user/update/{user}', [UserController::class, 'update']);
+Route::get('/user', [UserController::class, 'index']);
 
 Route::get('/product', [ProductController::class, 'index']);

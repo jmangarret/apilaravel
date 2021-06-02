@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        return User::orderBy('id', 'desc')->get();
+    }
     /**
      * function register user
      */
@@ -35,7 +39,7 @@ class UserController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'data' => $request->all(),
+            'data' => array_merge($data, ['id' => $user->id]),
             'messsage' => 'Register Succesfully...',
         ], 201);
     }
