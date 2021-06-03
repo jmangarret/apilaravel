@@ -16,8 +16,12 @@ use App\Http\Controllers\ProductController;
 */
 
 
+Route::post('/login',[UserController::class, 'login']);
 Route::post('/register',[UserController::class, 'register']);
-Route::put('/user/update/{user}', [UserController::class, 'update']);
-Route::get('/user', [UserController::class, 'index']);
 
-Route::get('/product', [ProductController::class, 'index']);
+//Route::middleware('auth:api')->group(function () {
+    Route::put('/user/update/{user}', [UserController::class, 'update']);
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/product', [ProductController::class, 'index']);
+//});
+

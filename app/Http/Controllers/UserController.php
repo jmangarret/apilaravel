@@ -13,6 +13,29 @@ class UserController extends Controller
     {
         return User::orderBy('id', 'desc')->get();
     }
+     /**
+     * function login user
+     */
+    public function login(Request $request)
+    {
+        $user = User::where('email', $request->input('email'))->first();
+
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'errors' => ['email' => ['The provided credentials are incorrect.']],
+                'messsage' => 'Login Failed...',
+            ], 400);
+        }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'data' => $user,
+            'messsage' => 'Login Succesfully...',
+        ], 200);
+    }
     /**
      * function register user
      */
