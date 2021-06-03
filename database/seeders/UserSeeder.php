@@ -19,6 +19,9 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
+            'cpf' => '123456789',
+            'telf' => '123456789',
+            'fecha_nac' => '2000-01-01',
             'password' => Hash::make('admin'),
             'created_at'=>date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s'),

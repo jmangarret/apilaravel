@@ -28,10 +28,12 @@ class UserController extends Controller
             ], 400);
         }
 
-        $data =  $request->all();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password = Hash::Make($data['password']);
+        $user->name     = $request->input('name');
+        $user->email    = $request->input('email');
+        $user->telf     = $request->input('telf');
+        $user->cpf      = $request->input('cpf');
+        $user->fecha_nac= $request->input('fecha_nac');
+        $user->password = Hash::Make($request->input('password'));
         $user->save();
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -39,7 +41,7 @@ class UserController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'data' => array_merge($data, ['id' => $user->id]),
+            'data' => array_merge($request->all(), ['id' => $user->id]),
             'messsage' => 'Register Succesfully...',
         ], 201);
     }
@@ -56,10 +58,12 @@ class UserController extends Controller
             ], 400);
         }
 
-        $data =  $request->all();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password = Hash::Make($data['password']);
+        $user->name     = $request->input('name');
+        $user->email    = $request->input('email');
+        $user->telf     = $request->input('telf');
+        $user->cpf      = $request->input('cpf');
+        $user->fecha_nac= $request->input('fecha_nac');
+        $user->password = Hash::Make($request->input('password'));
         $user->save();
 
         return response()->json([
